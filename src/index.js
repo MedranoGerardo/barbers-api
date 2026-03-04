@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth');
-const usuariosRoutes = require('./routes/usuarios');
-const apiRoutes = require('./routes/api');
+const authRoutes      = require('./routes/auth');
+const usuariosRoutes  = require('./routes/usuarios');
+const apiRoutes       = require('./routes/api');
+const horariosRoutes  = require('./routes/horarios');   // ← nuevo
+const ubicacionRoutes = require('./routes/ubicacion');  // ← nuevo
 
 const app = express();
 
@@ -13,9 +15,11 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas
-app.use('/api/auth', authRoutes);
-app.use('/api/usuarios', usuariosRoutes);
-app.use('/api', apiRoutes);
+app.use('/api/auth',      authRoutes);
+app.use('/api/usuarios',  usuariosRoutes);
+app.use('/api/horarios',  horariosRoutes);   // ← nuevo
+app.use('/api/ubicacion', ubicacionRoutes);  // ← nuevo
+app.use('/api',           apiRoutes);        // debe ir al final para no pisar las rutas anteriores
 
 // Ruta de prueba
 app.get('/', (req, res) => {
